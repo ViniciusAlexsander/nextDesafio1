@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { MdPersonOutline } from 'react-icons/md';
 
 import Prismic from '@prismicio/client';
-import { RichText } from 'prismic-dom';
 import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
@@ -33,20 +33,22 @@ export default function Home({ postsPagination }: HomeProps) {
     <div className={styles.container}>
       <div className={styles.posts}>
         {postsPagination.results.map(post => (
-          <a className={styles.post}>
-            <strong>{post.data.title}</strong>
-            <p>{post.data.subtitle}</p>
-            <div className={styles.postInfo}>
-              <div>
-                <AiOutlineCalendar className={styles.postIcon} />
-                {post.first_publication_date}
+          <Link key={post.uid} href={`/post/${post.uid}`}>
+            <a className={styles.post}>
+              <strong>{post.data.title}</strong>
+              <p>{post.data.subtitle}</p>
+              <div className={styles.postInfo}>
+                <div>
+                  <AiOutlineCalendar className={styles.postIcon} />
+                  {post.first_publication_date}
+                </div>
+                <div>
+                  <MdPersonOutline className={styles.postIcon} />
+                  {post.data.author}
+                </div>
               </div>
-              <div>
-                <MdPersonOutline className={styles.postIcon} />
-                {post.data.author}
-              </div>
-            </div>
-          </a>
+            </a>
+          </Link>
         ))}
       </div>
     </div>
