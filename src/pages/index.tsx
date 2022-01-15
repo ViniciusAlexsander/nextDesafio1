@@ -94,6 +94,7 @@ export const getStaticProps: GetStaticProps = async () => {
       postsPagination: {
         results: posts,
       },
+      revalidate: 60 * 30,
     },
   };
 };

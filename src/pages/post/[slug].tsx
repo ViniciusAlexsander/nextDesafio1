@@ -32,12 +32,14 @@ export default function Post({ post }: PostProps) {
     <div>
       <h1>{post.data.title}</h1>
       <p>{post.data.author}</p>\
-      {post.data.content.map(cont => {
-        <h2>{cont.heading}</h2>;
-        cont.body.map(b => {
-          <p>{b.text}</p>;
-        });
-      })}
+      {post.data.content.map(cont => (
+        <div>
+          <h2>{cont.heading}</h2>
+          {cont.body.map(b => (
+            <p>{b.text}</p>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
