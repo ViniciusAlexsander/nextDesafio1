@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
+import Head from 'next/head';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { MdPersonOutline } from 'react-icons/md';
 
@@ -30,28 +31,33 @@ interface HomeProps {
 
 export default function Home({ postsPagination }: HomeProps) {
   return (
-    <div className={commonStyles.container}>
-      <div className={styles.posts}>
-        {postsPagination.results.map(post => (
-          <Link key={post.uid} href={`/post/${post.uid}`}>
-            <a className={styles.post}>
-              <strong>{post.data.title}</strong>
-              <p>{post.data.subtitle}</p>
-              <div className={styles.postInfo}>
-                <div>
-                  <AiOutlineCalendar className={styles.postIcon} />
-                  {post.first_publication_date}
+    <>
+      <Head>
+        <title>Posts</title>
+      </Head>
+      <div className={commonStyles.container}>
+        <div className={styles.posts}>
+          {postsPagination.results.map(post => (
+            <Link key={post.uid} href={`/post/${post.uid}`}>
+              <a className={styles.post}>
+                <strong>{post.data.title}</strong>
+                <p>{post.data.subtitle}</p>
+                <div className={styles.postInfo}>
+                  <div>
+                    <AiOutlineCalendar className={styles.postIcon} />
+                    {post.first_publication_date}
+                  </div>
+                  <div>
+                    <MdPersonOutline className={styles.postIcon} />
+                    {post.data.author}
+                  </div>
                 </div>
-                <div>
-                  <MdPersonOutline className={styles.postIcon} />
-                  {post.data.author}
-                </div>
-              </div>
-            </a>
-          </Link>
-        ))}
+              </a>
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
