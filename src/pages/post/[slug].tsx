@@ -30,7 +30,12 @@ interface PostProps {
 export default function Post({ post }: PostProps) {
   return (
     <div>
-      <img src={post.data.banner.url} alt="Banner" />
+      <img
+        src={post.data.banner.url}
+        alt="Banner"
+        width="100%"
+        height="400px"
+      />
       <h1>{post.data.title}</h1>
       <p>{post.data.author}</p>
       {post.data.content.map(cont => (
