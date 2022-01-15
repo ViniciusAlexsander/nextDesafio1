@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { RichText } from 'prismic-dom';
+import { AiOutlineCalendar } from 'react-icons/ai';
+import { MdPersonOutline } from 'react-icons/md';
 
 import { getPrismicClient } from '../../services/prismic';
 
@@ -31,21 +32,35 @@ export default function Post({ post }: PostProps) {
   return (
     <div>
       <img
+        className={styles.img}
         src={post.data.banner.url}
         alt="Banner"
         width="100%"
         height="400px"
       />
-      <h1>{post.data.title}</h1>
-      <p>Autor: {post.data.author}</p>
-      {post.data.content.map(cont => (
-        <div>
-          <h2>{cont.heading}</h2>
-          {cont.body.map(b => (
-            <p>{b.text}</p>
+      <div className={commonStyles.container}>
+        <h1>{post.data.title}</h1>
+        <div className={styles.postInfo}>
+          <div>
+            <AiOutlineCalendar className={styles.postIcon} />
+            {post.first_publication_date}
+          </div>
+          <div>
+            <MdPersonOutline className={styles.postIcon} />
+            {post.data.author}
+          </div>
+        </div>
+        <div className={styles.postContent}>
+          {post.data.content.map(cont => (
+            <>
+              <h2>{cont.heading}</h2>
+              {cont.body.map(b => (
+                <p>{b.text}</p>
+              ))}
+            </>
           ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }

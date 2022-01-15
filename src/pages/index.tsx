@@ -30,7 +30,7 @@ interface HomeProps {
 
 export default function Home({ postsPagination }: HomeProps) {
   return (
-    <div className={styles.container}>
+    <div className={commonStyles.container}>
       <div className={styles.posts}>
         {postsPagination.results.map(post => (
           <Link key={post.uid} href={`/post/${post.uid}`}>
