@@ -37,7 +37,7 @@ export default function Post({ post }: PostProps) {
         height="400px"
       />
       <h1>{post.data.title}</h1>
-      <p>{post.data.author}</p>
+      <p>Autor: {post.data.author}</p>
       {post.data.content.map(cont => (
         <div>
           <h2>{cont.heading}</h2>
